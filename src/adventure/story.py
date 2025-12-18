@@ -52,6 +52,6 @@ if __name__ == "__main__":
 
         if choice == 'exit':
             console.print("[red]You decide to leave the forest. Goodbye![/red]")
-            break
-
+            break #forgot to add a break
+            
         show_result(step(choice, events))
