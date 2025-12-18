@@ -1,6 +1,14 @@
 from adventure.utils import read_events_from_file
 import random
 
+from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import Prompt
+from rich.text import Text
+
+console = Console()
+
+
 def step(choice: str, events):
     random_event = random.choice(events)
 
@@ -11,20 +19,39 @@ def step(choice: str, events):
     else:
         return "You stand still, unsure what to do. The forest swallows you."
 
+
 def left_path(event):
     return "You walk left. " + event
+
 
 def right_path(event):
     return "You walk right. " + event
 
-if __name__ == "__main__":
-    events = read_events_from_file('events.txt')
 
-    print("You wake up in a dark forest. You can go left or right.")
+def show_intro():
+    title = Text("Adventure", style="bold magenta")
+    body = Text("You wake up in a dark forest.\nYou can go left or right.", style="white")
+    console.print(Panel(body, title=title, border_style="magenta"))
+
+
+def show_result(result: str):
+    console.print(Panel.fit(result, border_style="cyan"))
+
+
+if __name__ == "__main__":
+    events = read_events_from_file("events.txt")
+
+    show_intro()
+
     while True:
-        choice = input("Which direction do you choose? (left/right/exit): ")
-        choice = choice.strip().lower()
-        if choice == 'exit':
+        choice = Prompt.ask(
+            "[bold]Which direction do you choose?[/bold] [dim](left/right/exit)[/dim]",
+            choices=["left", "right", "exit"],
+            default="left",
+        ).strip().lower()
+
+        if choice == "exit":
+            console.print(Panel.fit("You leave the forest. For now.", border_style="green"))
             break
-        
-        print(step(choice, events))
+
+        show_result(step(choice, events))
