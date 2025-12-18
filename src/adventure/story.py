@@ -27,13 +27,7 @@ if __name__ == "__main__":
         choice = input("Which direction do you choose? (left/right/exit): ")
         choice = choice.strip().lower()
         if choice == 'exit':
-<<<<<<< HEAD
-            break
-        
-        print(step(choice, events))
-=======
             console.print("[red]You decide to leave the forest. Goodbye![/red]")
             break #second check
 
         show_result(step(choice, events))
->>>>>>> origin/3-formatting-story-text
