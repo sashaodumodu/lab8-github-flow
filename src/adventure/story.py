@@ -51,7 +51,7 @@ if __name__ == "__main__":
         ).strip().lower()
 
         if choice == "exit":
-            console.print(Panel.fit("You leave the forest. For now.", border_style="green"))
+            console.print(Panel.fit("Goodbye! Thanks for playing.", border_style="green"))
             break
 
         show_result(step(choice, events))
